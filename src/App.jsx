@@ -1,9 +1,11 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Header from './components/Header'
 import Meme from './components/Meme'
+import Form from './components/Form'
 import './App.css'
 
 function App() {
+  const childRef = useRef();
 
   const [meme, setMeme] = useState({
     topText: "",
@@ -35,13 +37,28 @@ function App() {
     });
   }
 
+  function printText(event) {
+    const { name, value } = event.target;
+    setMeme(function (prevMeme) {
+      return {
+        ...prevMeme,
+        [name]: value
+      };
+    });
+  }
+
+  function snapshot() {
+    childRef.current.takeScreenshot()
+  }
+
   return (
     <div className="App">
       <Header />
 
       <div id="memeWrapper" className="container mt-5 pt-5">
         <div className="row justify-content-center">
-          <div className="col-md-4"><Meme meme={meme} /></div>
+          <div className="col-md-4"><Meme meme={meme} ref={childRef} /></div>
+          <div className="col-md-4"><Form meme={meme} printText={printText} generateMeme={generateMeme} snapshot={snapshot} /></div>
         </div>
       </div>
 

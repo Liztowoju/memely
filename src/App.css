@@ -30,3 +30,7 @@
 .meme-heading.top {
   top: 0;
 }
+
+.meme{
+  position: relative;
+}
