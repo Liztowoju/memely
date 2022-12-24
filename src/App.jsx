@@ -3,7 +3,9 @@ import Header from './components/Header'
 import Meme from './components/Meme'
 import Form from './components/Form'
 import Gallery from './components/Gallery'
+import { ContentfulClient, ContentfulProvider } from 'react-contentful';
 import './App.css'
+// const contentful = require('contentful')
 
 function App() {
   const childRef = useRef();
@@ -15,12 +17,29 @@ function App() {
   });
 
   const [allMemes, setAllMemes] = useState([]);
+  // const [allItems, setAllItems] = useState([]);
 
   useEffect(function () {
-    fetch("https://api.imgflip.com/get_memes")
-      .then(res => res.json())
-      .then(data => setAllMemes(data.data.memes));
+    const client = new ContentfulClient({
+      accessToken: 'HNp5TfB0k_lI3sohmVAMM-tUb5lzK2Nu8NfQ_DFtIfo',
+      space: 'g1jda96az8cb',
+      environment: 'master'
+    });
+    
+    client.getEntries({
+      content_type: "meme"
+    })
+    .then((response) => {
+      setAllMemes(response.items)
+    })
+    .catch(console.error)
+
+
+    // fetch("https://api.imgflip.com/get_memes")
+    //   .then(res => res.json())
+    //   .then(data => setAllMemes(data.data.memes));
   }, [])
+  console.log(allMemes)
 
   useEffect(function () {
     if (allMemes.length === 0) return;
