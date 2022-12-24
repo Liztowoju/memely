@@ -5,7 +5,6 @@ import Form from './components/Form'
 import Gallery from './components/Gallery'
 import { ContentfulClient, ContentfulProvider } from 'react-contentful';
 import './App.css'
-// const contentful = require('contentful')
 
 function App() {
   const childRef = useRef();
