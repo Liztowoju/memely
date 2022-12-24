@@ -24,14 +24,14 @@ function App() {
       space: 'g1jda96az8cb',
       environment: 'master'
     });
-    
+
     client.getEntries({
       content_type: "meme"
     })
-    .then((response) => {
-      setAllMemes(response.items)
-    })
-    .catch(console.error)
+      .then((response) => {
+        setAllMemes(response.items)
+      })
+      .catch(console.error)
 
 
     // fetch("https://api.imgflip.com/get_memes")
