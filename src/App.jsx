@@ -57,7 +57,8 @@ function App() {
     const randomNumber = Math.floor(Math.random() * allMemes.length);
     setMeme(function (oldValue) {
       return {
-        ...oldValue,
+        topText : '',
+        bottomText: '',
         url: url
       };
     });
